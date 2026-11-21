@@ -10,7 +10,7 @@ describe("Login", () => {
     await LoginPage.open();
   });
 
-  it("LGN-001 shows all login elements", async () => {
+  it("LGN-001 shows all login elements @smoke", async () => {
     await expect(LoginPage.mobileOrEmailInput).toBeDisplayed();
     await expect(LoginPage.passwordInput).toBeDisplayed();
     await expect(LoginPage.forgotPasswordLink).toBeDisplayed();
@@ -18,7 +18,7 @@ describe("Login", () => {
     await expect(LoginPage.signUpLink).toBeDisplayed();
   });
 
-  it("LGN-002 masks the password by default", async () => {
+  it("LGN-002 masks the password by default @smoke", async () => {
     await LoginPage.passwordInput.setValue(FAKE_PASSWORD);
     await expect(LoginPage.passwordInput).not.toHaveText(FAKE_PASSWORD);
   });
@@ -28,14 +28,14 @@ describe("Login", () => {
     await LoginPage.showPasswordToggle.click();
     await expect(LoginPage.passwordInput).toHaveText(FAKE_PASSWORD);
   });
-  it("LGN-004 shows required error when fields are empty", async () => {
+  it("LGN-004 shows required error when fields are empty @negative", async () => {
     await LoginPage.loginButton.click();
 
     await expect(LoginPage.errorText("This field is required")).toBeDisplayed();
     await expect(LoginPage.title).toBeDisplayed();
   });
 
-  it("LGN-005 shows error for an invalid mobile number", async () => {
+  it("LGN-005 shows error for an invalid mobile number @negative", async () => {
     await LoginPage.login("0917123", FAKE_PASSWORD);
 
     await expect(
@@ -43,7 +43,7 @@ describe("Login", () => {
     ).toBeDisplayed();
   });
 
-  it("LGN-006 rejects an unregistered account", async () => {
+  it("LGN-006 rejects an unregistered account @negative", async () => {
     await LoginPage.login("qa.tester@example.com", FAKE_PASSWORD);
 
     await expect(
@@ -52,7 +52,7 @@ describe("Login", () => {
     await expect(LoginPage.title).toBeDisplayed();
   });
 
-  it("LGN-007 shows required error when password is empty", async () => {
+  it("LGN-007 shows required error when password is empty @negative", async () => {
     await LoginPage.login("qa.tester@example.com", "");
 
     await expect(LoginPage.errorText("This field is required")).toBeDisplayed();

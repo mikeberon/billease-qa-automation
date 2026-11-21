@@ -13,7 +13,7 @@ describe('Sign Up', () => {
     await SignUpPage.open();
   });
 
-  it('SGN-001 shows all sign up elements', async () => {
+  it('SGN-001 shows all sign up elements @smoke', async () => {
     await expect(SignUpPage.title).toBeDisplayed();
     await expect(SignUpPage.mobileInput).toBeDisplayed();
     await expect(SignUpPage.emailInput).toBeDisplayed();
@@ -21,33 +21,33 @@ describe('Sign Up', () => {
     await expect(SignUpPage.signUpButton).toBeDisplayed();
   });
 
-  it('SGN-002 shows all required errors when the form is empty', async () => {
+  it('SGN-002 shows all required errors when the form is empty @negative', async () => {
     await SignUpPage.signUpButton.click();
     await expect(SignUpPage.errorText('Please enter mobile number')).toBeDisplayed();
     await expect(SignUpPage.errorText('Please enter email')).toBeDisplayed();
     await expect(SignUpPage.errorText(CONSENT_ERROR)).toBeDisplayed();
   });
 
-  it('SGN-003 shows an error for an invalid mobile number', async () => {
+  it('SGN-003 shows an error for an invalid mobile number @negative', async () => {
     await SignUpPage.fillForm({ mobile: INVALID_MOBILE, email: TEST_EMAIL, consent: true });
     await SignUpPage.signUpButton.click();
     await expect(SignUpPage.errorText('Invalid number')).toBeDisplayed();
     await expect(SignUpPage.title).toBeDisplayed();
   });
 
-  it('SGN-004 shows an error for an invalid email', async () => {
+  it('SGN-004 shows an error for an invalid email @negative', async () => {
     await SignUpPage.fillForm({ mobile: INVALID_MOBILE, email: 'qa.tester@', consent: true });
     await SignUpPage.signUpButton.click();
     await expect(SignUpPage.errorText('Invalid email address')).toBeDisplayed();
   });
 
-  it('SGN-005 asks for consent when the checkbox is not ticked', async () => {
+  it('SGN-005 asks for consent when the checkbox is not ticked @negative', async () => {
     await SignUpPage.fillForm({ mobile: INVALID_MOBILE, email: TEST_EMAIL });
     await SignUpPage.signUpButton.click();
     await expect(SignUpPage.errorText(CONSENT_ERROR)).toBeDisplayed();
   });
 
-  it('SGN-006 ticking the checkbox clears the consent error', async () => {
+  it('SGN-006 ticking the checkbox clears the consent error @negative', async () => {
     await SignUpPage.signUpButton.click();
     await expect(SignUpPage.errorText(CONSENT_ERROR)).toBeDisplayed();
     await SignUpPage.consentCheckbox.click();

@@ -12,14 +12,14 @@ describe("Forgot Password", () => {
     await ForgotPasswordPage.open();
   });
 
-  it("FPW-001 shows all forgot password elements", async () => {
+  it("FPW-001 shows all forgot password elements @smoke", async () => {
     await expect(ForgotPasswordPage.title).toBeDisplayed();
     await expect(ForgotPasswordPage.mobileOrEmailInput).toBeDisplayed();
     await expect(ForgotPasswordPage.resetButton).toBeDisplayed();
     await expect(ForgotPasswordPage.backButton).toBeDisplayed();
   });
 
-  it("FPW-002 shows an error when the field is empty", async () => {
+  it("FPW-002 shows an error when the field is empty @negative", async () => {
     await ForgotPasswordPage.resetButton.click();
     await expect(
       ForgotPasswordPage.errorText(INVALID_INPUT_ERROR),
@@ -27,7 +27,7 @@ describe("Forgot Password", () => {
     await expect(ForgotPasswordPage.title).toBeDisplayed();
   });
 
-  it("FPW-003 shows an error for an invalid mobile number", async () => {
+  it("FPW-003 shows an error for an invalid mobile number @negative", async () => {
     await ForgotPasswordPage.requestReset("09017");
     await expect(
       ForgotPasswordPage.errorText(INVALID_INPUT_ERROR),
@@ -35,7 +35,7 @@ describe("Forgot Password", () => {
     await expect(ForgotPasswordPage.title).toBeDisplayed();
   });
 
-  it("FPW-004 opens account recovery for an unregistered email", async () => {
+  it("FPW-004 opens account recovery for an unregistered email @negative", async () => {
     await ForgotPasswordPage.requestReset("qa.tester@example.com");
     await expect(AccountRecoveryPage.title).toBeDisplayed();
     await expect(AccountRecoveryPage.continueButton).toBeDisplayed();
