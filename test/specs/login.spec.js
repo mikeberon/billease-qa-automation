@@ -1,17 +1,12 @@
 import LoginPage from "../../src/pageobjects/login.page.js";
+import { resetApp } from '../../src/helpers/app.helper.js';
 
-const APP_ID = "ph.billeasev2.mobile";
+// const APP_ID = "ph.billeasev2.mobile";
 const FAKE_PASSWORD = "QaTest!2345"; // dummy pw
 
 describe("Login", () => {
   beforeEach(async () => {
-    await driver.execute("mobile: clearApp", { appId: APP_ID });
-    await driver.execute("mobile: changePermissions", {
-      permissions: "android.permission.POST_NOTIFICATIONS",
-      appPackage: APP_ID,
-      action: "grant",
-    });
-    await driver.activateApp(APP_ID);
+    await resetApp();
     await LoginPage.open();
   });
 
