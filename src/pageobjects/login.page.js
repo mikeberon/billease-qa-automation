@@ -1,30 +1,32 @@
-import WelcomePage from './welcome.page.js';
+import WelcomePage from "./welcome.page.js";
 
 class LoginPage {
-
   get title() {
-    return $('id=ComposeHost_LogInScreen_title');
+    return $("id=ComposeHost_LogInScreen_title");
   }
   get mobileOrEmailInput() {
-    return $('id=login_input_email_or_phone');
+    return $("id=login_input_email_or_phone");
   }
   get passwordInput() {
-    return $('id=login_input_password');
+    return $("id=login_input_password");
   }
   get showPasswordToggle() {
-    return $('~Show password');
+    return $("~Show password");
   }
   get forgotPasswordLink() {
-    return $('id=login_link_forgot_password');
+    return $("id=login_link_forgot_password");
   }
   get loginButton() {
-    return $('id=btn_log_in');
+    return $("id=btn_log_in");
   }
   get signUpLink() {
-    return $('id=login_link_sign_up');
+    return $("id=login_link_sign_up");
   }
   get backButton() {
-    return $('id=back_btn');
+    return $("id=back_btn");
+  }
+  errorText(message) {
+    return $(`android=new UiSelector().text("${message}")`);
   }
 
   async open() {

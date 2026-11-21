@@ -33,4 +33,33 @@ describe("Login", () => {
     await LoginPage.showPasswordToggle.click();
     await expect(LoginPage.passwordInput).toHaveText(FAKE_PASSWORD);
   });
+  it("LGN-004 shows required error when fields are empty", async () => {
+    await LoginPage.loginButton.click();
+
+    await expect(LoginPage.errorText("This field is required")).toBeDisplayed();
+    await expect(LoginPage.title).toBeDisplayed();
+  });
+
+  it("LGN-005 shows error for an invalid mobile number", async () => {
+    await LoginPage.login("0917123", FAKE_PASSWORD);
+
+    await expect(
+      LoginPage.errorText("Invalid email or mobile"),
+    ).toBeDisplayed();
+  });
+
+  it("LGN-006 rejects an unregistered account", async () => {
+    await LoginPage.login("qa.tester@example.com", FAKE_PASSWORD);
+
+    await expect(
+      LoginPage.errorText("Please use correct username and password."),
+    ).toBeDisplayed();
+    await expect(LoginPage.title).toBeDisplayed();
+  });
+
+  it("LGN-007 shows required error when password is empty", async () => {
+    await LoginPage.login("qa.tester@example.com", "");
+
+    await expect(LoginPage.errorText("This field is required")).toBeDisplayed();
+  });
 });
