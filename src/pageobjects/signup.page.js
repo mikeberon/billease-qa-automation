@@ -1,14 +1,41 @@
-import WelcomePage from './welcome.page.js';
+import WelcomePage from "./welcome.page.js";
+import { byPlatform, byText } from "../helpers/selector.js";
 
 class SignUpPage {
-  get title() { return $('android=new UiSelector().textContains("get started")'); }
-  get mobileInput() { return $('id=sign_up_mobile_text'); }
-  get emailInput() { return $('id=signup_email_text'); }
-  get consentCheckbox() { return $('id=checkBox'); }
-  get signUpButton() { return $('id=sign_up'); }
-  get backButton() { return $('id=back_btn'); }
+  get title() {
+    return byPlatform({
+      android: 'android=new UiSelector().textContains("get started")',
+      ios: '-ios predicate string:label CONTAINS[c] "get started"',
+    });
+  }
+  get mobileInput() {
+    return byPlatform({
+      android: "id=sign_up_mobile_text",
+      ios: "-ios class chain:**/XCUIElementTypeTextField[1]",
+    });
+  }
+  get emailInput() {
+    return byPlatform({
+      android: "id=signup_email_text",
+      ios: "-ios class chain:**/XCUIElementTypeTextField[2]",
+    });
+  }
+  get consentCheckbox() {
+    return byPlatform({ android: "id=checkBox", ios: "~checkBox" });
+  }
+  get signUpButton() {
+    return byPlatform({
+      android: "id=sign_up",
+      ios: '-ios predicate string:type == "XCUIElementTypeButton" AND label == "Sign up"',
+    });
+  }
+  get backButton() {
+    return byPlatform({ android: "id=back_btn", ios: "~Back" });
+  }
 
-  errorText(message) { return $(`android=new UiSelector().text("${message}")`); }
+  errorText(message) {
+    return byText(message);
+  }
 
   async open() {
     await WelcomePage.skipIntro();

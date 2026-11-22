@@ -1,15 +1,24 @@
+import { byPlatform, byText } from "../helpers/selector.js";
+
 // Shown after Reset with an email that isn't registered.
 // We never tap Continue since it asks for ID details.
 class AccountRecoveryPage {
   get title() {
-    return $('android=new UiSelector().text("Account recovery")');
+    return byText("Account recovery");
   }
   get continueButton() {
-    return $("id=ComposeHost_WelcomeScreen_userEmail_btn_continue");
+    return byPlatform({
+      android: "id=ComposeHost_WelcomeScreen_userEmail_btn_continue",
+      ios: '-ios predicate string:type == "XCUIElementTypeButton" AND label ==[c] "Continue"',
+    });
   }
   get cancelButton() {
-    return $("id=ComposeHost_WelcomeScreen_userEmail_btn_cancel");
+    return byPlatform({
+      android: "id=ComposeHost_WelcomeScreen_userEmail_btn_cancel",
+      ios: '-ios predicate string:type == "XCUIElementTypeButton" AND label ==[c] "Cancel"',
+    });
   }
+
   async cancel() {
     // Wait for the screen to settle, an early tap gets lost in the transition
     await this.title.waitForDisplayed();

@@ -1,19 +1,36 @@
-class WelcomePage {
+import { byPlatform } from "../helpers/selector.js";
 
+class WelcomePage {
   get getStartedButton() {
-    return $('android=new UiSelector().textMatches("(?i)get started")');
+    return byPlatform({
+      android: 'android=new UiSelector().textMatches("(?i)get started")',
+      ios: '-ios predicate string:label ==[c] "Get started"',
+    });
   }
   get loginButton() {
-    return $('id=btn_log_in');
+    return byPlatform({
+      android: "id=btn_log_in",
+      ios: '-ios predicate string:type == "XCUIElementTypeButton" AND label == "Log in"',
+    });
   }
   get signUpButton() {
-    return $('id=sign_up');
+    return byPlatform({
+      android: "id=sign_up",
+      ios: '-ios predicate string:type == "XCUIElementTypeButton" AND label == "Sign up"',
+    });
   }
 
-  // Actions
+  // The intro only shows on a fresh install, so tap it only if it's there
   async skipIntro() {
-    await this.getStartedButton.waitForDisplayed({ timeout: 20000 });
-    await this.getStartedButton.click();
+    await driver.waitUntil(
+      async () =>
+        (await this.getStartedButton.isDisplayed()) ||
+        (await this.loginButton.isDisplayed()),
+      { timeout: 20000, timeoutMsg: "Landing screen did not load" }
+    );
+    if (await this.getStartedButton.isDisplayed()) {
+      await this.getStartedButton.click();
+    }
     await this.loginButton.waitForDisplayed();
   }
 
@@ -25,6 +42,5 @@ class WelcomePage {
     await this.signUpButton.click();
   }
 }
-
 
 export default new WelcomePage();

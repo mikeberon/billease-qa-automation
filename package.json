@@ -9,7 +9,9 @@
     "test:android:negative": "wdio run config/wdio.android.conf.js --mochaOpts.grep @negative",
     "test:android:login": "wdio run config/wdio.android.conf.js --suite login",
     "test:android:forgot": "wdio run config/wdio.android.conf.js --suite forgotPassword",
-    "test:android:signup": "wdio run config/wdio.android.conf.js --suite signup"
+    "test:android:signup": "wdio run config/wdio.android.conf.js --suite signup",
+    "test:ios": "wdio run config/wdio.ios.conf.js",
+    "test:ios:smoke": "wdio run config/wdio.ios.conf.js --mochaOpts.grep @smoke"
   },
   "keywords": [],
   "type": "module",

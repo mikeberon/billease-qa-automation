@@ -1,13 +1,32 @@
-import LoginPage from './login.page.js';
+import LoginPage from "./login.page.js";
+import { byPlatform, byText } from "../helpers/selector.js";
 
 class ForgotPasswordPage {
-  get title() { return $('id=ComposeHost_ResetPassword_title'); }
-  get mobileOrEmailInput() { return $('id=text_field_contact_to_reset'); }
-  get resetButton() { return $('id=btn_reset'); }
-  get backButton() { return $('id=back_btn'); }
+  get title() {
+    return byPlatform({
+      android: "id=ComposeHost_ResetPassword_title",
+      ios: '-ios predicate string:type == "XCUIElementTypeStaticText" AND label == "Forgot password?"',
+    });
+  }
+  get mobileOrEmailInput() {
+    return byPlatform({
+      android: "id=text_field_contact_to_reset",
+      ios: '-ios predicate string:type == "XCUIElementTypeTextField"',
+    });
+  }
+  get resetButton() {
+    return byPlatform({
+      android: "id=btn_reset",
+      ios: '-ios predicate string:type == "XCUIElementTypeButton" AND label == "Reset"',
+    });
+  }
+  get backButton() {
+    return byPlatform({ android: "id=back_btn", ios: "~Back" });
+  }
 
-  errorText(message) { return $(`android=new UiSelector().text("${message}")`); }
-
+  errorText(message) {
+    return byText(message);
+  }
   async open() {
     await LoginPage.open();
     await LoginPage.forgotPasswordLink.click();
