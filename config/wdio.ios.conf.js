@@ -12,6 +12,7 @@ export const config = {
       'appium:bundleId': process.env.IOS_BUNDLE_ID,
       'appium:xcodeOrgId': process.env.IOS_TEAM_ID,
       'appium:xcodeSigningId': 'Apple Development',
+      "appium:updatedWDABundleId": process.env.IOS_WDA_BUNDLE_ID,
       'appium:noReset': true,
       'appium:autoAcceptAlerts': true,
     },

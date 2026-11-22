@@ -21,9 +21,8 @@ describe("Forgot Password", () => {
 
   it("FPW-002 shows an error when the field is empty @negative", async () => {
     await ForgotPasswordPage.resetButton.click();
-    await expect(
-      ForgotPasswordPage.errorText(INVALID_INPUT_ERROR),
-    ).toBeDisplayed();
+    const emptyError = driver.isIOS ? "This field is required" : INVALID_INPUT_ERROR;
+    await expect(ForgotPasswordPage.errorText(emptyError)).toBeDisplayed();
     await expect(ForgotPasswordPage.title).toBeDisplayed();
   });
 

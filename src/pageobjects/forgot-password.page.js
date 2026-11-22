@@ -1,5 +1,5 @@
 import LoginPage from "./login.page.js";
-import { byPlatform, byText } from "../helpers/selector.js";
+import { byPlatform, byText, IOS_BACK_BUTTON } from "../helpers/selector.js";
 
 class ForgotPasswordPage {
   get title() {
@@ -21,7 +21,10 @@ class ForgotPasswordPage {
     });
   }
   get backButton() {
-    return byPlatform({ android: "id=back_btn", ios: "~Back" });
+    return byPlatform({
+      android: "id=back_btn",
+      ios: IOS_BACK_BUTTON,
+    });
   }
 
   errorText(message) {

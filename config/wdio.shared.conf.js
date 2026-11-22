@@ -20,12 +20,20 @@ export const config = {
   reporters: ['spec'],
   mochaOpts: { ui: 'bdd', timeout: 120000 },
 
-  // Save a screenshot when a test fails
+  // Save a screenshot and the screen's XML when a test fails
   afterTest: async function (test, context, { passed }) {
-    if (!passed) {
-      fs.mkdirSync('./reports/screenshots', { recursive: true });
-      const name = test.title.replace(/[^\w-]+/g, '_');
-      await driver.saveScreenshot(`./reports/screenshots/${name}.png`);
-    }
+    if (!passed) await saveFailure(test.title);
+  },
+
+  // Same for failures in before/after hooks
+  afterHook: async function (test, context, { passed }) {
+    if (!passed) await saveFailure(test.title);
   },
 };
+
+async function saveFailure(title) {
+  fs.mkdirSync("./reports/screenshots", { recursive: true });
+  const name = title.replace(/[^\w-]+/g, "_");
+  await driver.saveScreenshot(`./reports/screenshots/${name}.png`);
+  fs.writeFileSync(`./reports/screenshots/${name}.xml`, await driver.getPageSource());
+}

@@ -23,6 +23,7 @@
     "@wdio/spec-reporter": "^9.33.1",
     "appium": "^3.9.1",
     "appium-inspector-plugin": "^2026.11.6",
-    "appium-uiautomator2-driver": "^8.7.3"
+    "appium-uiautomator2-driver": "^8.7.3",
+    "appium-xcuitest-driver": "^12.22.8"
   }
 }

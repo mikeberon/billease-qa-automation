@@ -1,48 +1,54 @@
 import WelcomePage from "./welcome.page.js";
-import { byPlatform, byText } from "../helpers/selector.js";
+import { byPlatform, byText, IOS_BACK_BUTTON } from "../helpers/selector.js";
 
 class LoginPage {
   get title() {
     return byPlatform({
       android: "id=ComposeHost_LogInScreen_title",
-      ios: '-ios predicate string:type == "XCUIElementTypeStaticText" AND label == "Log in"',
+      ios: '-ios predicate string:name == "navigationbar-title-text" AND label == "Log in"',
     });
   }
   get mobileOrEmailInput() {
     return byPlatform({
       android: "id=login_input_email_or_phone",
-      ios: '-ios predicate string:type == "XCUIElementTypeTextField"',
+      ios: "~otcMobileEmailTextField",
     });
   }
   get passwordInput() {
     return byPlatform({
       android: "id=login_input_password",
-      ios: '-ios predicate string:type == "XCUIElementTypeSecureTextField"',
+      ios: "~otcPasswordTextField",
     });
   }
   get showPasswordToggle() {
-    return $("~Show password");
+    return byPlatform({
+      android: "~Show password",
+      ios: "~icons/ios/hide",
+    });
   }
   get forgotPasswordLink() {
     return byPlatform({
       android: "id=login_link_forgot_password",
-      ios: '-ios predicate string:label == "Forgot password?"',
+      ios: "~otcForgotPasswordTextLink",
     });
   }
   get loginButton() {
     return byPlatform({
       android: "id=btn_log_in",
-      ios: '-ios predicate string:type == "XCUIElementTypeButton" AND label == "Log in"',
+      ios: "~otcLogInButton",
     });
   }
   get signUpLink() {
     return byPlatform({
       android: "id=login_link_sign_up",
-      ios: '-ios predicate string:label == "Sign Up"',
+      ios: "~otcSignUpTextLink",
     });
   }
   get backButton() {
-    return byPlatform({ android: "id=back_btn", ios: "~Back" });
+    return byPlatform({
+      android: "id=back_btn",
+      ios: IOS_BACK_BUTTON,
+    });
   }
 
   errorText(message) {

@@ -1,27 +1,31 @@
 import WelcomePage from "./welcome.page.js";
-import { byPlatform, byText } from "../helpers/selector.js";
+import { byPlatform, byText, IOS_BACK_BUTTON } from "../helpers/selector.js";
 
 class SignUpPage {
   get title() {
     return byPlatform({
       android: 'android=new UiSelector().textContains("get started")',
-      ios: '-ios predicate string:label CONTAINS[c] "get started"',
+      ios: "~Let's get started",
     });
   }
   get mobileInput() {
     return byPlatform({
       android: "id=sign_up_mobile_text",
-      ios: "-ios class chain:**/XCUIElementTypeTextField[1]",
+      ios: "~mobile-text-field",
     });
   }
   get emailInput() {
     return byPlatform({
       android: "id=signup_email_text",
-      ios: "-ios class chain:**/XCUIElementTypeTextField[2]",
+      ios: "~email-text-field",
     });
   }
+  // On iOS the checkbox and the consent text are one button
   get consentCheckbox() {
-    return byPlatform({ android: "id=checkBox", ios: "~checkBox" });
+    return byPlatform({
+      android: "id=checkBox",
+      ios: "~privacy-policy-link-terms-conditions-link",
+    });
   }
   get signUpButton() {
     return byPlatform({
@@ -30,7 +34,10 @@ class SignUpPage {
     });
   }
   get backButton() {
-    return byPlatform({ android: "id=back_btn", ios: "~Back" });
+    return byPlatform({
+      android: "id=back_btn",
+      ios: IOS_BACK_BUTTON,
+    });
   }
 
   errorText(message) {

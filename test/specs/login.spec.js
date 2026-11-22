@@ -1,7 +1,7 @@
 import LoginPage from "../../src/pageobjects/login.page.js";
-import { resetApp } from '../../src/helpers/app.helper.js';
+import { resetApp } from "../../src/helpers/app.helper.js";
 
-// const APP_ID = "ph.billeasev2.mobile";
+
 const FAKE_PASSWORD = "QaTest!2345"; // dummy pw
 
 describe("Login", () => {
@@ -38,9 +38,10 @@ describe("Login", () => {
   it("LGN-005 shows error for an invalid mobile number @negative", async () => {
     await LoginPage.login("0917123", FAKE_PASSWORD);
 
-    await expect(
-      LoginPage.errorText("Invalid email or mobile"),
-    ).toBeDisplayed();
+    const invalidMobileError = driver.isIOS
+      ? "This is not a valid phone number"
+      : "Invalid email or mobile";
+    await expect(LoginPage.errorText(invalidMobileError)).toBeDisplayed();
   });
 
   it("LGN-006 rejects an unregistered account @negative", async () => {
