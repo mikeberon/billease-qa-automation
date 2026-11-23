@@ -1,8 +1,7 @@
 import LoginPage from "../../src/pageobjects/login.page.js";
 import { resetApp } from "../../src/helpers/app.helper.js";
 
-
-const FAKE_PASSWORD = "QaTest!2345"; // dummy pw
+const FAKE_PASSWORD = "QaTest!2345";
 
 describe("Login", () => {
   beforeEach(async () => {
