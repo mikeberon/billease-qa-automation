@@ -10,7 +10,7 @@ Scope: Login, Forgot Password, Sign Up
 | Device | Pixel 8 emulator, Android 15 (API 35) | iPhone 18 Pro (real device) |
 | App source | Google Play | App Store |
 | How it was run | Manual + automated (Appium) | Manual + automated (Appium, real device) |
-| Date | 21 Nov 2026 | 22 Nov 2026 |
+| Date | 21 and 23 Nov 2026 | 22 Nov 2026 |
 
 ## Test data
 
@@ -52,8 +52,8 @@ A valid 11-digit mobile number was never entered on any screen that sends an OTP
 | LGN-006 | Unregistered account | `qa.tester@example.com` + `QaTest!2345`, tap Log in | "Please use correct username and password.", stays on Login | Pass | Pass | Yes |
 | LGN-007 | Password empty | Valid looking email, empty password, tap Log in | "This field is required" under Password | Pass | Pass | Yes |
 | LGN-008 | Forgot password link | Tap Forgot password? | Forgot password screen opens | Pass | Pass | Yes (via FPW tests) |
-| LGN-009 | Sign Up link | Tap Sign Up | Sign up screen opens | Not run | Pass | No |
-| LGN-010 | Back button | Tap Back | Returns to landing screen | Not run | Pass | No |
+| LGN-009 | Sign Up link | Tap Sign Up | Sign up screen opens | Pass | Pass | No |
+| LGN-010 | Back button | Tap Back | Returns to landing screen | Pass | Pass | No |
 | LGN-011 | Successful login | Log in with a real registered account | User lands on home screen | Blocked | Blocked | No |
 
 Notes:
@@ -91,12 +91,12 @@ Notes:
 | SGN-005 | Consent not ticked | Mobile `09017`, valid email, consent unticked, tap Sign up | Consent error shown | Pass | Pass | Yes |
 | SGN-006 | Tick consent clears error | Tap Sign up empty, then tick consent | Consent error disappears | Pass | Pass | Yes |
 | SGN-007 | Back button | Tap Back | Returns to landing screen | Pass | Pass | Yes |
-| SGN-008 | Privacy Policy / Terms links | Tap Privacy Policy, then Terms & Conditions | Each document opens | Not run | **Fail** | No |
+| SGN-008 | Privacy Policy / Terms links | Tap Privacy Policy, then Terms & Conditions | Each document opens | Pass | **Fail** | No |
 | SGN-009 | Valid sign up | Valid mobile + email + consent, tap Sign up | OTP is sent | Blocked | Blocked | No |
 
 Notes:
 - SGN-004 fails on iOS: `qa.tester@` shows "Please enter email", as if the field were empty (see BUGS.md).
-- SGN-008 fails on iOS: Privacy Policy opens, but Terms & Conditions stays blank after loading (see BUGS.md).
+- SGN-008 fails on iOS: Privacy Policy opens, but Terms & Conditions stays blank after loading (see BUGS.md). Both documents load on Android.
 - SGN-009 would send an OTP to a real number and start a real account, which the assessment rules don't allow.
 
 ---
@@ -106,8 +106,8 @@ Notes:
 | | Android | iOS |
 |---|---|---|
 | Total | 29 | 29 |
-| Pass | 22 | 23 |
+| Pass | 25 | 23 |
 | Fail | 0 | 2 |
-| Not run | 3 | 0 |
+| Not run | 0 | 0 |
 | Blocked | 4 | 4 |
 | Automated | 21 (21 pass) | 21 (20 pass, SGN-004 fails on a real bug) |

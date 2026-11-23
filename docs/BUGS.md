@@ -12,15 +12,15 @@
 | ID | Title | Android | iOS | Severity | Test case |
 |---|---|:---:|:---:|---|---|
 | [BUG-001](#bug-001-invalid-email-on-sign-up-shows-please-enter-email) | Invalid email on Sign Up shows "Please enter email" | ✅ | ❌ | 🟠 Medium | SGN-004 |
-| [BUG-002](#bug-002-terms--conditions-page-stays-blank) | Terms & Conditions page stays blank | ❔ | ❌ | 🟠 Medium | SGN-008 |
+| [BUG-002](#bug-002-terms--conditions-page-stays-blank) | Terms & Conditions page stays blank | ✅ | ❌ | 🟠 Medium | SGN-008 |
 | [BUG-003](#bug-003-same-error-shows-different-text-on-android-and-ios) | Same error shows different text on Android and iOS | ⚠️ | ⚠️ | 🟢 Low | FPW-002, LGN-005 |
 | [BUG-004](#bug-004-empty-field-message-differs-between-login-and-forgot-password) | Empty-field message differs between Login and Forgot Password | ❌ | ✅ | 🟢 Low | LGN-004, FPW-002 |
 | [BUG-005](#bug-005-unregistered-email-goes-straight-to-id-based-account-recovery) | Unregistered email goes straight to ID-based Account recovery | ❌ | ❌ | 🟢 Low | FPW-004 |
 | [BUG-006](#bug-006-cancel-on-account-recovery-jumps-to-the-landing-screen) | Cancel on Account recovery jumps to the landing screen | ❌ | ❌ | 🟢 Low | FPW-005 |
-| [BUG-007](#bug-007-login-shows-one-error-at-a-time-sign-up-shows-all) | Login shows one error at a time, Sign Up shows all | ❌ | ❔ | 🟢 Low | LGN-004, SGN-002 |
+| [BUG-007](#bug-007-login-shows-one-error-at-a-time-sign-up-shows-all) | Login shows one error at a time, Sign Up shows all | ❌ | ❌ | 🟢 Low | LGN-004, SGN-002 |
 | [BUG-008](#bug-008-account-recovery-mascot-image-has-no-accessibility-label) | Account recovery mascot image has no accessibility label | ❌ | ✅ | 🟢 Low | FPW-004 |
 
-❌ affected · ✅ works correctly · ⚠️ differs between platforms · ❔ not checked yet
+❌ affected · ✅ works correctly · ⚠️ differs between platforms
 
 ```mermaid
 pie showData
@@ -62,7 +62,7 @@ Page source: [SGN-004 iOS](evidence/page-sources-ios/SGN-004_shows_an_error_for_
 
 ## BUG-002: Terms & Conditions page stays blank
 
-`iOS` (Android not checked yet) · `Medium` · Test case **SGN-008** (manual)
+`iOS only` · `Medium` · Test case **SGN-008** (manual)
 
 **Steps**
 1. Open the app > **Sign up**
@@ -71,7 +71,7 @@ Page source: [SGN-004 iOS](evidence/page-sources-ios/SGN-004_shows_an_error_for_
 **Expected:** The Terms and Conditions document loads.
 **Actual:** A "Terms and Conditions" sheet opens with a loading spinner. When the spinner stops, the page stays blank. The reload button doesn't help. Happens every time.
 
-**Notes:** **Privacy Policy** on the same screen loads fine, so the connection is OK and only the Terms link is affected.
+**Notes:** **Privacy Policy** on the same screen loads fine, so the connection is OK and only the Terms link is affected. On Android, Terms & Conditions loads without issues.
 
 **Why it matters:** The user is asked to consent to terms they can't read.
 
@@ -80,7 +80,7 @@ Page source: [SGN-004 iOS](evidence/page-sources-ios/SGN-004_shows_an_error_for_
   <tr><td><img src="evidence/ios/SGN-008_ios.png" width="240" alt="Terms and Conditions sheet stuck loading"></td></tr>
 </table>
 
-Screen recording: _add Drive link_
+Screen recording: in the [recordings folder](https://drive.google.com/drive/folders/1d2D7QG8Q_hgE5EYkZ8dmdkdj6ti_2TWt?usp=sharing)
 
 ---
 
@@ -163,12 +163,14 @@ The same situation shows a different message depending on the platform.
 
 ## BUG-007: Login shows one error at a time, Sign Up shows all
 
-`Android` (iOS not checked by hand) · `Low (UX)` · Test cases **LGN-004**, **LGN-007**, **SGN-002**
+`Both` · `Low (UX)` · Test cases **LGN-004**, **LGN-007**, **SGN-002**
 
 **Steps**
 1. Login: tap **Log in** with both fields empty → only Mobile/Email shows an error.
 2. Fill in Mobile/Email, tap **Log in** again → only now does Password show "This field is required".
 3. Sign Up: tap **Sign up** with everything empty → all three errors show at once.
+
+Checked by hand on both Android and iOS.
 
 **Expected:** The same validation style on both forms. Showing all errors at once saves the user a round trip.
 
