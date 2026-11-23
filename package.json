@@ -1,7 +1,7 @@
 {
   "name": "billease-qa-automation",
   "version": "1.0.0",
-  "description": "",
+  "description": "Appium tests for the BillEase mobile app on Android and iOS",
   "main": "index.js",
   "scripts": {
     "test:android": "wdio run config/wdio.android.conf.js",

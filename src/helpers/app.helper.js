@@ -24,8 +24,6 @@ export async function resetApp() {
   await driver.activateApp(ANDROID_APP_ID);
 }
 
-// The iOS app reopens on the last screen it was on,
-// so tap the back arrow until we're on the landing screen (it has none)
 // The iOS app reopens on the last screen it was on, so go back
 // until we're on the landing screen (it has no back arrow or Cancel)
 async function backToLanding() {

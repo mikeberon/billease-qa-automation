@@ -54,17 +54,17 @@ npm install
 
 1. Android Studio with an emulator (tested: Pixel 8, API 35, Google Play image)
 2. Install BillEase from the Play Store on the emulator
-3. `npx appium driver install uiautomator2`
-4. `ANDROID_HOME` set, emulator running (`adb devices`)
+3. `ANDROID_HOME` set, emulator running (`adb devices`)
+
+The Appium drivers are dev dependencies, so `npm install` already installs them.
 
 ### iOS
 
 Needs a Mac with Xcode and a real iPhone with BillEase from the App Store.
 
-1. `npx appium driver install xcuitest`
-2. Connect the iPhone, trust the Mac, enable Developer Mode (Settings, Privacy & Security)
-3. Sign WebDriverAgent: open `~/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/WebDriverAgent.xcodeproj`, set your team on WebDriverAgentLib and WebDriverAgentRunner, give the runner a unique bundle id, run Product > Test once on the phone
-4. Set environment variables:
+1. Connect the iPhone, trust the Mac, enable Developer Mode (Settings, Privacy & Security)
+2. Sign WebDriverAgent: open `node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/WebDriverAgent.xcodeproj`, set your team on WebDriverAgentLib and WebDriverAgentRunner, give the runner a unique bundle id, run Product > Test once on the phone
+3. Set environment variables:
 
 ```bash
 export IOS_UDID=<device udid>              # xcrun devicectl list devices
