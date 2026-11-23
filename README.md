@@ -6,8 +6,9 @@ Stack: Appium 3, WebdriverIO 9, Mocha, JavaScript, Page Object Model.
 
 ## Deliverables
 
-- [Test cases and results](docs/TEST_CASES.md)
-- [Bug report](docs/BUGS.md)
+- [Test cases](docs/TEST_CASES.md)
+- [Test report](docs/TEST_REPORT.md): pass rates, expected vs actual per platform, recommendations
+- [Bugs](docs/BUGS.md)
 - [Screen recordings](https://drive.google.com/drive/folders/1d2D7QG8Q_hgE5EYkZ8dmdkdj6ti_2TWt?usp=sharing) (Android run, iOS run, BUG-002)
 
 ## Results
@@ -16,9 +17,10 @@ Stack: Appium 3, WebdriverIO 9, Mocha, JavaScript, Page Object Model.
 |---|---|---|
 | Device | Pixel 8 emulator, API 35 | iPhone 18 Pro, iOS 27.0.1 (real device) |
 | Automated | 21/21 pass | 20/21 pass |
-| Test cases | 25 pass, 4 blocked | 23 pass, 2 fail, 4 blocked |
+| Test cases (29) | 25 pass, 4 blocked | 23 pass, 2 fail, 4 blocked |
+| Pass rate (executed) | 100% | 92% |
 
-SGN-004 fails on iOS because of a real bug (BUG-001). 8 bugs logged in total.
+SGN-004 fails on iOS because of a real bug (BUG-001). 8 bugs logged in total. Full details in the [test report](docs/TEST_REPORT.md).
 
 ## Test data
 
